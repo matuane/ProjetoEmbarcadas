@@ -1,0 +1,213 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"25 ./lcd.h
+[; ;./lcd.h: 25:  void lcdInit(void);
+[v _lcdInit `(v ~T0 @X0 0 ef ]
+"23
+[; ;./lcd.h: 23:  void lcdCommand(unsigned char cmd);
+[v _lcdCommand `(v ~T0 @X0 0 ef1`uc ]
+"24
+[; ;./lcd.h: 24:  void lcdData(unsigned char valor);
+[v _lcdData `(v ~T0 @X0 0 ef1`uc ]
+"11 ./delay.h
+[; ;./delay.h: 11: void delay(int valor);
+[v _delay `(v ~T0 @X0 0 ef1`i ]
+"7 except.c
+[; ;except.c: 7: void exceptDesarmado(){
+[v _exceptDesarmado `(v ~T0 @X0 1 ef ]
+{
+[e :U _exceptDesarmado ]
+[f ]
+"8
+[; ;except.c: 8:     int i;
+[v _i `i ~T0 @X0 1 a ]
+[v F13 `uc ~T0 @X0 -> 20 `i s ]
+[i F13
+:U ..
+"9
+[; ;except.c: 9:     char mensage[20]= "Central ja desarmada";
+-> 67 `c
+-> 101 `c
+-> 110 `c
+-> 116 `c
+-> 114 `c
+-> 97 `c
+-> 108 `c
+-> 32 `c
+-> 106 `c
+-> 97 `c
+-> 32 `c
+-> 100 `c
+-> 101 `c
+-> 115 `c
+-> 97 `c
+-> 114 `c
+-> 109 `c
+-> 97 `c
+-> 100 `c
+-> 97 `c
+..
+]
+[v _mensage `uc ~T0 @X0 -> 20 `i a ]
+[e = _mensage F13 ]
+"10
+[; ;except.c: 10:     lcdInit();
+[e ( _lcdInit ..  ]
+"12
+[; ;except.c: 12:     lcdCommand(0x01);
+[e ( _lcdCommand (1 -> -> 1 `i `uc ]
+"13
+[; ;except.c: 13:     lcdCommand(0x85);
+[e ( _lcdCommand (1 -> -> 133 `i `uc ]
+"14
+[; ;except.c: 14:     for(i = 0; i<20; i++){
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 20 `i 2  ]
+[e $U 3  ]
+[e :U 2 ]
+{
+"15
+[; ;except.c: 15:         if(i == 8){
+[e $ ! == _i -> 8 `i 5  ]
+{
+"16
+[; ;except.c: 16:             lcdCommand(0xC2);
+[e ( _lcdCommand (1 -> -> 194 `i `uc ]
+"17
+[; ;except.c: 17:         }
+}
+[e :U 5 ]
+"18
+[; ;except.c: 18:         lcdData(mensage[i]);
+[e ( _lcdData (1 -> *U + &U _mensage * -> -> _i `ui `ux -> -> # *U &U _mensage `ui `ux `uc ]
+"19
+[; ;except.c: 19:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 20 `i 2  ]
+[e :U 3 ]
+}
+"20
+[; ;except.c: 20:     for(i = 0; i<5; i++){
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 5 `i 6  ]
+[e $U 7  ]
+[e :U 6 ]
+{
+"21
+[; ;except.c: 21:         delay(500);
+[e ( _delay (1 -> 500 `i ]
+"22
+[; ;except.c: 22:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 5 `i 6  ]
+[e :U 7 ]
+}
+"23
+[; ;except.c: 23:     lcdCommand(0x01);
+[e ( _lcdCommand (1 -> -> 1 `i `uc ]
+"25
+[; ;except.c: 25: }
+[e :UE 1 ]
+}
+"27
+[; ;except.c: 27: void exceptArmado(){
+[v _exceptArmado `(v ~T0 @X0 1 ef ]
+{
+[e :U _exceptArmado ]
+[f ]
+"28
+[; ;except.c: 28:     int i;
+[v _i `i ~T0 @X0 1 a ]
+[v F17 `uc ~T0 @X0 -> 20 `i s ]
+[i F17
+:U ..
+"29
+[; ;except.c: 29:     char mensage[20]= "Central ja armada";
+-> 67 `c
+-> 101 `c
+-> 110 `c
+-> 116 `c
+-> 114 `c
+-> 97 `c
+-> 108 `c
+-> 32 `c
+-> 106 `c
+-> 97 `c
+-> 32 `c
+-> 97 `c
+-> 114 `c
+-> 109 `c
+-> 97 `c
+-> 100 `c
+-> 97 `c
+-> 0 `c
+..
+]
+[v _mensage `uc ~T0 @X0 -> 20 `i a ]
+[e = _mensage F17 ]
+"30
+[; ;except.c: 30:     lcdInit();
+[e ( _lcdInit ..  ]
+"32
+[; ;except.c: 32:     lcdCommand(0x01);
+[e ( _lcdCommand (1 -> -> 1 `i `uc ]
+"33
+[; ;except.c: 33:     lcdCommand(0x85);
+[e ( _lcdCommand (1 -> -> 133 `i `uc ]
+"34
+[; ;except.c: 34:     for(i = 0; i<20; i++){
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 20 `i 10  ]
+[e $U 11  ]
+[e :U 10 ]
+{
+"35
+[; ;except.c: 35:         if(i == 8){
+[e $ ! == _i -> 8 `i 13  ]
+{
+"36
+[; ;except.c: 36:             lcdCommand(0xC4);
+[e ( _lcdCommand (1 -> -> 196 `i `uc ]
+"37
+[; ;except.c: 37:         }
+}
+[e :U 13 ]
+"38
+[; ;except.c: 38:         lcdData(mensage[i]);
+[e ( _lcdData (1 -> *U + &U _mensage * -> -> _i `ui `ux -> -> # *U &U _mensage `ui `ux `uc ]
+"39
+[; ;except.c: 39:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 20 `i 10  ]
+[e :U 11 ]
+}
+"40
+[; ;except.c: 40:     for(i = 0; i<5; i++){
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 5 `i 14  ]
+[e $U 15  ]
+[e :U 14 ]
+{
+"41
+[; ;except.c: 41:         delay(500);
+[e ( _delay (1 -> 500 `i ]
+"42
+[; ;except.c: 42:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 5 `i 14  ]
+[e :U 15 ]
+}
+"43
+[; ;except.c: 43:     lcdCommand(0x01);
+[e ( _lcdCommand (1 -> -> 1 `i `uc ]
+"45
+[; ;except.c: 45: }
+[e :UE 9 ]
+}

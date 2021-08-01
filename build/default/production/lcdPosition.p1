@@ -1,0 +1,65 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"23 ./lcd.h
+[; ;./lcd.h: 23:  void lcdCommand(unsigned char cmd);
+[v _lcdCommand `(v ~T0 @X0 0 ef1`uc ]
+"9 lcdPosition.c
+[; ;lcdPosition.c: 9: void lcdPosition(unsigned char coluna, unsigned char linha){
+[v _lcdPosition `(v ~T0 @X0 1 ef2`uc`uc ]
+{
+[e :U _lcdPosition ]
+[v _coluna `uc ~T0 @X0 1 r1 ]
+[v _linha `uc ~T0 @X0 1 r2 ]
+[f ]
+"11
+[; ;lcdPosition.c: 11:     char comando = 0;
+[v _comando `uc ~T0 @X0 1 a ]
+[e = _comando -> -> 0 `i `uc ]
+"13
+[; ;lcdPosition.c: 13:     if(linha==0) comando = 0x80 + linha;
+[e $ ! == -> _linha `i -> 0 `i 2  ]
+[e = _comando -> + -> 128 `i -> _linha `i `uc ]
+[e :U 2 ]
+"14
+[; ;lcdPosition.c: 14:     if(linha == 0) comando = 0x80 + coluna;
+[e $ ! == -> _linha `i -> 0 `i 3  ]
+[e = _comando -> + -> 128 `i -> _coluna `i `uc ]
+[e :U 3 ]
+"16
+[; ;lcdPosition.c: 16:     if(linha == 0 && comando != 0x01) comando = 0x80 + coluna;
+[e $ ! && == -> _linha `i -> 0 `i != -> _comando `i -> 1 `i 4  ]
+[e = _comando -> + -> 128 `i -> _coluna `i `uc ]
+[e :U 4 ]
+"17
+[; ;lcdPosition.c: 17:     if(linha == 1 && comando != 0x01) comando = 0xC0 + coluna;
+[e $ ! && == -> _linha `i -> 1 `i != -> _comando `i -> 1 `i 5  ]
+[e = _comando -> + -> 192 `i -> _coluna `i `uc ]
+[e :U 5 ]
+"18
+[; ;lcdPosition.c: 18:     if(coluna > 15){
+[e $ ! > -> _coluna `i -> 15 `i 6  ]
+{
+"19
+[; ;lcdPosition.c: 19:         coluna = 0;
+[e = _coluna -> -> 0 `i `uc ]
+"20
+[; ;lcdPosition.c: 20:     }
+}
+[e :U 6 ]
+"21
+[; ;lcdPosition.c: 21:     if(coluna < 0){
+[e $ ! < -> _coluna `i -> 0 `i 7  ]
+{
+"22
+[; ;lcdPosition.c: 22:         coluna = 15;
+[e = _coluna -> -> 15 `i `uc ]
+"23
+[; ;lcdPosition.c: 23:     }
+}
+[e :U 7 ]
+"25
+[; ;lcdPosition.c: 25:     lcdCommand(comando);
+[e ( _lcdCommand (1 -> _comando `uc ]
+"26
+[; ;lcdPosition.c: 26: }
+[e :UE 1 ]
+}

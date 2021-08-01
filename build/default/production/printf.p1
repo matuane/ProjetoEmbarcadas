@@ -1,0 +1,423 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"25 ./lcd.h
+[; ;./lcd.h: 25:  void lcdInit(void);
+[v _lcdInit `(v ~T0 @X0 0 ef ]
+"4 ./lcdPosition.h
+[; ;./lcdPosition.h: 4: void lcdPosition(unsigned char coluna, unsigned char linha);
+[v _lcdPosition `(v ~T0 @X0 0 ef2`uc`uc ]
+"24 ./lcd.h
+[; ;./lcd.h: 24:  void lcdData(unsigned char valor);
+[v _lcdData `(v ~T0 @X0 0 ef1`uc ]
+"23
+[; ;./lcd.h: 23:  void lcdCommand(unsigned char cmd);
+[v _lcdCommand `(v ~T0 @X0 0 ef1`uc ]
+"26 ./config.h
+[p x OSC=HS                   ]
+"27
+[p x FCMEN  =  OFF ]
+"28
+[p x IESO  =  OFF ]
+"29
+[p x PWRT  =  OFF ]
+"30
+[p x BOREN  =  OFF ]
+"31
+[p x BORV  =  46 ]
+"32
+[p x WDT=OFF                  ]
+"33
+[p x WDTPS  =  1                ]
+"34
+[p x MCLRE=ON                 ]
+"35
+[p x LPT1OSC  =  OFF ]
+"36
+[p x PBADEN  =  ON ]
+"37
+[p x CCP2MX  =  PORTC ]
+"38
+[p x STVREN  =  OFF ]
+"39
+[p x LVP=OFF                  ]
+"40
+[p x XINST  =  OFF ]
+"41
+[p x DEBUG  =  OFF              ]
+"43
+[p x CP0  =  OFF ]
+"44
+[p x CP1  =  OFF ]
+"45
+[p x CP2  =  OFF ]
+"46
+[p x CP3  =  OFF ]
+"47
+[p x CPB  =  OFF ]
+"48
+[p x CPD  =  OFF ]
+"50
+[p x WRT0  =  OFF ]
+"51
+[p x WRT1  =  OFF ]
+"52
+[p x WRT2  =  OFF ]
+"53
+[p x WRT3  =  OFF ]
+"54
+[p x WRTB  =  OFF ]
+"55
+[p x WRTC  =  OFF ]
+"56
+[p x WRTD  =  OFF ]
+"58
+[p x EBTR0  =  OFF ]
+"59
+[p x EBTR1  =  OFF ]
+"60
+[p x EBTR2  =  OFF ]
+"61
+[p x EBTR3  =  OFF ]
+"62
+[p x EBTRB  =  OFF ]
+"6 printf.c
+[; ;printf.c: 6: void mensagemInicial(){
+[v _mensagemInicial `(v ~T0 @X0 1 ef ]
+{
+[e :U _mensagemInicial ]
+[f ]
+"8
+[; ;printf.c: 8:     int i;
+[v _i `i ~T0 @X0 1 a ]
+[v F16 `uc ~T0 @X0 -> 35 `i s ]
+[i F16
+:U ..
+"11
+[; ;printf.c: 11:      char msg[35] = "Alarme Digite: 1(Armar) 2(Desarmar)";
+-> 65 `c
+-> 108 `c
+-> 97 `c
+-> 114 `c
+-> 109 `c
+-> 101 `c
+-> 32 `c
+-> 68 `c
+-> 105 `c
+-> 103 `c
+-> 105 `c
+-> 116 `c
+-> 101 `c
+-> 58 `c
+-> 32 `c
+-> 49 `c
+-> 40 `c
+-> 65 `c
+-> 114 `c
+-> 109 `c
+-> 97 `c
+-> 114 `c
+-> 41 `c
+-> 32 `c
+-> 50 `c
+-> 40 `c
+-> 68 `c
+-> 101 `c
+-> 115 `c
+-> 97 `c
+-> 114 `c
+-> 109 `c
+-> 97 `c
+-> 114 `c
+-> 41 `c
+..
+]
+[v _msg `uc ~T0 @X0 -> 35 `i a ]
+[e = _msg F16 ]
+"14
+[; ;printf.c: 14:     lcdInit();
+[e ( _lcdInit ..  ]
+"17
+[; ;printf.c: 17:         lcdPosition(0, 0);
+[e ( _lcdPosition (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+"18
+[; ;printf.c: 18:         for (i = 0; i < 35; i++) {
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 35 `i 2  ]
+[e $U 3  ]
+[e :U 2 ]
+{
+"19
+[; ;printf.c: 19:             lcdData(msg[i]);
+[e ( _lcdData (1 -> *U + &U _msg * -> -> _i `ui `ux -> -> # *U &U _msg `ui `ux `uc ]
+"20
+[; ;printf.c: 20:         if(i==6){
+[e $ ! == _i -> 6 `i 5  ]
+{
+"21
+[; ;printf.c: 21:             lcdCommand(0xC0);
+[e ( _lcdCommand (1 -> -> 192 `i `uc ]
+"22
+[; ;printf.c: 22:         }
+}
+[e :U 5 ]
+"23
+[; ;printf.c: 23:         if(i==14){
+[e $ ! == _i -> 14 `i 6  ]
+{
+"24
+[; ;printf.c: 24:             lcdCommand(0x92);
+[e ( _lcdCommand (1 -> -> 146 `i `uc ]
+"25
+[; ;printf.c: 25:         }
+}
+[e :U 6 ]
+"26
+[; ;printf.c: 26:         if(i==23){
+[e $ ! == _i -> 23 `i 7  ]
+{
+"27
+[; ;printf.c: 27:             lcdCommand(0xD2);
+[e ( _lcdCommand (1 -> -> 210 `i `uc ]
+"28
+[; ;printf.c: 28:         }
+}
+[e :U 7 ]
+"29
+[; ;printf.c: 29:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 35 `i 2  ]
+[e :U 3 ]
+}
+"30
+[; ;printf.c: 30: }
+[e :UE 1 ]
+}
+"32
+[; ;printf.c: 32: void mensagemDesarmada(){
+[v _mensagemDesarmada `(v ~T0 @X0 1 ef ]
+{
+[e :U _mensagemDesarmada ]
+[f ]
+"35
+[; ;printf.c: 35:     int i;
+[v _i `i ~T0 @X0 1 a ]
+[v F20 `uc ~T0 @X0 -> 18 `i s ]
+[i F20
+:U ..
+"36
+[; ;printf.c: 36:     char msg[18] = "Central Desarmada";
+-> 67 `c
+-> 101 `c
+-> 110 `c
+-> 116 `c
+-> 114 `c
+-> 97 `c
+-> 108 `c
+-> 32 `c
+-> 68 `c
+-> 101 `c
+-> 115 `c
+-> 97 `c
+-> 114 `c
+-> 109 `c
+-> 97 `c
+-> 100 `c
+-> 97 `c
+-> 0 `c
+..
+]
+[v _msg `uc ~T0 @X0 -> 18 `i a ]
+[e = _msg F20 ]
+"40
+[; ;printf.c: 40:     lcdInit();
+[e ( _lcdInit ..  ]
+"43
+[; ;printf.c: 43:     lcdCommand(0x01);
+[e ( _lcdCommand (1 -> -> 1 `i `uc ]
+"44
+[; ;printf.c: 44:     lcdPosition(5, 0);
+[e ( _lcdPosition (2 , -> -> 5 `i `uc -> -> 0 `i `uc ]
+"45
+[; ;printf.c: 45:     for(i =0; i<18; i++){
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 18 `i 9  ]
+[e $U 10  ]
+[e :U 9 ]
+{
+"46
+[; ;printf.c: 46:         lcdData(msg[i]);
+[e ( _lcdData (1 -> *U + &U _msg * -> -> _i `ui `ux -> -> # *U &U _msg `ui `ux `uc ]
+"47
+[; ;printf.c: 47:         if(i == 7){
+[e $ ! == _i -> 7 `i 12  ]
+{
+"48
+[; ;printf.c: 48:             lcdCommand(0xC4);
+[e ( _lcdCommand (1 -> -> 196 `i `uc ]
+"49
+[; ;printf.c: 49:         }
+}
+[e :U 12 ]
+"50
+[; ;printf.c: 50:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 18 `i 9  ]
+[e :U 10 ]
+}
+"51
+[; ;printf.c: 51: }
+[e :UE 8 ]
+}
+"53
+[; ;printf.c: 53: void mensagemArmada(){
+[v _mensagemArmada `(v ~T0 @X0 1 ef ]
+{
+[e :U _mensagemArmada ]
+[f ]
+"54
+[; ;printf.c: 54:     int i;
+[v _i `i ~T0 @X0 1 a ]
+[v F24 `uc ~T0 @X0 -> 14 `i s ]
+[i F24
+:U ..
+"55
+[; ;printf.c: 55:     char msg[14] = "Central Armada";
+-> 67 `c
+-> 101 `c
+-> 110 `c
+-> 116 `c
+-> 114 `c
+-> 97 `c
+-> 108 `c
+-> 32 `c
+-> 65 `c
+-> 114 `c
+-> 109 `c
+-> 97 `c
+-> 100 `c
+-> 97 `c
+..
+]
+[v _msg `uc ~T0 @X0 -> 14 `i a ]
+[e = _msg F24 ]
+"58
+[; ;printf.c: 58:     lcdInit();
+[e ( _lcdInit ..  ]
+"61
+[; ;printf.c: 61:     lcdCommand(0x01);
+[e ( _lcdCommand (1 -> -> 1 `i `uc ]
+"62
+[; ;printf.c: 62:     lcdPosition(4, 0);
+[e ( _lcdPosition (2 , -> -> 4 `i `uc -> -> 0 `i `uc ]
+"65
+[; ;printf.c: 65:     for(i=0;i<14;i++) {
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 14 `i 14  ]
+[e $U 15  ]
+[e :U 14 ]
+{
+"66
+[; ;printf.c: 66:         lcdData(msg[i]);
+[e ( _lcdData (1 -> *U + &U _msg * -> -> _i `ui `ux -> -> # *U &U _msg `ui `ux `uc ]
+"67
+[; ;printf.c: 67:         if (i == 7) {
+[e $ ! == _i -> 7 `i 17  ]
+{
+"68
+[; ;printf.c: 68:             lcdCommand(0xC4);
+[e ( _lcdCommand (1 -> -> 196 `i `uc ]
+"69
+[; ;printf.c: 69:         }
+}
+[e :U 17 ]
+"70
+[; ;printf.c: 70:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 14 `i 14  ]
+[e :U 15 ]
+}
+"71
+[; ;printf.c: 71: }
+[e :UE 13 ]
+}
+"73
+[; ;printf.c: 73: void mensagemInvadida(){
+[v _mensagemInvadida `(v ~T0 @X0 1 ef ]
+{
+[e :U _mensagemInvadida ]
+[f ]
+"76
+[; ;printf.c: 76:     int i;
+[v _i `i ~T0 @X0 1 a ]
+[v F28 `uc ~T0 @X0 -> 19 `i s ]
+[i F28
+:U ..
+"77
+[; ;printf.c: 77:     char msg[19] = "Residencia Invadida";
+-> 82 `c
+-> 101 `c
+-> 115 `c
+-> 105 `c
+-> 100 `c
+-> 101 `c
+-> 110 `c
+-> 99 `c
+-> 105 `c
+-> 97 `c
+-> 32 `c
+-> 73 `c
+-> 110 `c
+-> 118 `c
+-> 97 `c
+-> 100 `c
+-> 105 `c
+-> 100 `c
+-> 97 `c
+..
+]
+[v _msg `uc ~T0 @X0 -> 19 `i a ]
+[e = _msg F28 ]
+"80
+[; ;printf.c: 80:     lcdInit();
+[e ( _lcdInit ..  ]
+"83
+[; ;printf.c: 83:     lcdCommand(0xC3);
+[e ( _lcdCommand (1 -> -> 195 `i `uc ]
+"86
+[; ;printf.c: 86:     for(i=0; i<19; i++){
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 19 `i 19  ]
+[e $U 20  ]
+[e :U 19 ]
+{
+"87
+[; ;printf.c: 87:         lcdData(msg[i]);
+[e ( _lcdData (1 -> *U + &U _msg * -> -> _i `ui `ux -> -> # *U &U _msg `ui `ux `uc ]
+"88
+[; ;printf.c: 88:         if (i == 10) {
+[e $ ! == _i -> 10 `i 22  ]
+{
+"89
+[; ;printf.c: 89:             lcdCommand(0x94);
+[e ( _lcdCommand (1 -> -> 148 `i `uc ]
+"90
+[; ;printf.c: 90:         }
+}
+[e :U 22 ]
+"91
+[; ;printf.c: 91:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 19 `i 19  ]
+[e :U 20 ]
+}
+"92
+[; ;printf.c: 92: }
+[e :UE 18 ]
+}
